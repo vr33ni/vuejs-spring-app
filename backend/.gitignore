@@ -8,6 +8,9 @@ target/
 !.mvn/wrapper/*
 !.mvn/wrapper/maven-wrapper.jar
 
+# Node
+/node_modules
+/node
 
 ### STS ###
 .apt_generated

@@ -1,6 +1,9 @@
 package com.vr33ni.backend.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.mongodb.core.MongoTemplate;
+import org.springframework.data.mongodb.core.query.Criteria;
+import org.springframework.data.mongodb.core.query.Query;
 import org.springframework.stereotype.Service;
 
 import com.vr33ni.backend.model.Item;
@@ -15,6 +18,10 @@ public class ItemService {
     @Autowired
     private ItemRepository itemRepository;
 
+    @Autowired
+    private MongoTemplate mongoTemplate;
+
+    // CRUD operations and query methods out of the box - using MongoRepository
     public List<Item> getAllItems() {
         return itemRepository.findAll();
     }
@@ -31,4 +38,19 @@ public class ItemService {
         itemRepository.deleteById(id);
     }
 
- }
+    public List<Item> getItemsByBrand(String brand) {
+        return itemRepository.findByBrand(brand);
+    }
+
+    public List<Item> getItemsByType(String type) {
+        return itemRepository.findByType(type);
+    }
+
+    // Custom query - using MongoTemplate
+    public List<Item> getItemsByNameContaining(String substring) {
+        Query query = new Query();
+        query.addCriteria(Criteria.where("name").regex(substring, "i")); // "i" => case-insensitive
+        return mongoTemplate.find(query, Item.class);    
+    }
+
+}
