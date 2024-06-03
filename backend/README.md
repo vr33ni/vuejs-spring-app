@@ -165,10 +165,13 @@ http://localhost:8080/items
 
 ## Endpoints
 
-- GET /items/: Retrieve all items
-- GET /items/{id}: Retrieve an item by ID
-- POST /items/: Create a new item
-- DELETE /items/{id}: Delete an item by ID
+- **GET /api/items**: Retrieve all items
+- **GET /api/items/{id}**: Retrieve an item by ID
+- **POST /api/items/**: Create a new item
+- **DELETE /api/items/{id}**: Delete an item by ID
+- **GET /api/items/brand/{brand}**: Retrieve items by brand
+- **GET /api/items/type/{type}**: Retrieve items by type
+- **GET /api/items/search?name={name}**: Retrieve items by name containing a substring (case-insensitive)
 
 [Back to top](#table-of-contents)
 

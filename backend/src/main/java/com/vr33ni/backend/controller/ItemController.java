@@ -16,7 +16,7 @@ public class ItemController {
     @Autowired
     private ItemService itemService;
 
-    @GetMapping({"", "/"}) // Handle both "/" and "" (empty) paths    
+    @GetMapping({ "", "/" }) // Handle both "/" and "" (empty) paths
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
@@ -34,5 +34,23 @@ public class ItemController {
     @DeleteMapping("/{id}")
     public void deleteItem(@PathVariable String id) {
         itemService.deleteItem(id);
+    }
+
+    // New endpoint to find items by brand
+    @GetMapping("/brand/{brand}")
+    public List<Item> getItemsByBrand(@PathVariable String brand) {
+        return itemService.getItemsByBrand(brand);
+    }
+
+    // New endpoint to find items by type
+    @GetMapping("/type/{type}")
+    public List<Item> getItemsByType(@PathVariable String type) {
+        return itemService.getItemsByType(type);
+    }
+
+    // Endpoint to find items by name containing substring
+    @GetMapping("/search")
+    public List<Item> getItemsByNameContaining(@RequestParam String name) {
+        return itemService.getItemsByNameContaining(name);
     }
 }
