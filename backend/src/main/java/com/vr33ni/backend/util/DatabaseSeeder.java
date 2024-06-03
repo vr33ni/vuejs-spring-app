@@ -36,6 +36,7 @@ public class DatabaseSeeder implements CommandLineRunner {
         // seedDatabase();
 
         // Run migration scripts
+        System.out.println("running migration scripts");
         runMigrationScripts();
 
     }

@@ -10,13 +10,13 @@ import java.util.List;
 import java.util.Optional;
 
 @RestController
-@RequestMapping("/items")
+@RequestMapping("/api/items")
 public class ItemController {
 
     @Autowired
     private ItemService itemService;
 
-    @GetMapping("/")
+    @GetMapping({"", "/"}) // Handle both "/" and "" (empty) paths    
     public List<Item> getAllItems() {
         return itemService.getAllItems();
     }
@@ -35,5 +35,4 @@ public class ItemController {
     public void deleteItem(@PathVariable String id) {
         itemService.deleteItem(id);
     }
-
 }

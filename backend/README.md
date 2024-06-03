@@ -13,6 +13,8 @@ To run this application locally, you need to have the following software install
 - MongoDB Community Server
 - Git (optional, for cloning the repository)
 
+To run this applicaton using Docker, you need to have Docker Desktop installed or use Docker in a Linux environment. (not been tested yet)
+
 ### 1. Java Development Kit (JDK)
 
 Ensure you have JDK 17 or later installed. You can download it from the [Oracle website](https://www.oracle.com/java/technologies/javase-jdk17-downloads.html) or use an open-source version like OpenJDK.
@@ -59,22 +61,20 @@ To verify the installation, run:
 git --version
 ```
 
-## Setup Instructions
-
-Follow these steps to set up and run the application locally:
-
-### 1. Clone the Repository (if using Git)
-
 ```sh
 git clone https://github.com/vr33ni/vuejs-spring-app.git
 cd vuejs-spring-app/backend
 ```
 
-### 2. Configure MongoDB
+## Run locally without Docker
+
+Follow these steps to set up and run the application locally:
+
+### 1. Configure MongoDB
 
 Ensure MongoDB is running on localhost:27017. No additional configuration is necessary if MongoDB is running with the default settings.
 
-### 3. Build the Project
+### 2. Build the Project
 
 Navigate to the project directory and build the project using Maven:
 
@@ -82,7 +82,7 @@ Navigate to the project directory and build the project using Maven:
 mvn clean install
 ```
 
-### 4. Run the Application
+### 3. Run the Application
 
 Start the Spring Boot application:
 
@@ -97,7 +97,24 @@ If you prefer to rely on a pre-installed Maven and use your global environment, 
  mvn spring-boot:run relies
  ```
 
-### 5. Access the Application
+## Run locally with Docker (on Mac)
+
+Follow these steps to set up and run the application locally:
+
+### 1. Build the Docker image
+
+```sh
+cd vuejs-spring-app/backend
+docker build --build-arg JAR_FILE=target/\*.jar --platform=linux/amd64  -t vr33ni/backend .
+```
+
+### 2. Run the Docker container
+
+```sh
+docker run --platform=linux/amd64 -p 8080:8080 vr33ni/backend                              
+```
+
+## Access the Application
 
 Once the application is running, you can access it using a web browser or API client (like Postman) at:
 
@@ -105,7 +122,7 @@ Once the application is running, you can access it using a web browser or API cl
 http://localhost:8080/items
 ```
 
-### Endpoints
+## Endpoints
 
 - GET /items/: Retrieve all items
 - GET /items/{id}: Retrieve an item by ID
