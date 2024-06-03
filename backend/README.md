@@ -1,19 +1,49 @@
 # Spring Boot Application with MongoDB
 
+## Table of Contents
+
+1. [Overview](#overview)
+2. [Prerequisites](#prerequisites)
+    - [To run without Docker](#to-run-without-docker)
+    - [To run with Docker](#to-run-with-docker)
+3. [Installation](#installation)
+    - [1. Java Development Kit (JDK)](#1-java-development-kit-jdk)
+    - [2. Apache Maven](#2-apache-maven)
+    - [3. MongoDB Community Server](#3-mongodb-community-server)
+    - [4. Git (Optional)](#4-git-optional)
+4. [Running the Application](#running-the-application)
+    - [Run locally without Docker](#run-locally-without-docker)
+    - [Run with Docker](#run-with-docker)
+5. [Access the Application](#access-the-application)
+6. [Endpoints](#endpoints)
+7. [Initializing the Database](#initializing-the-database)
+8. [Additional Information](#additional-information)
+9. [Troubleshooting](#troubleshooting)
+
 ## Overview
 
 This project is a basic web application built with Spring Boot and Java, using MongoDB as the database. The application provides basic CRUD operations for an `Item` model.
 
+[Back to top](#table-of-contents)
+
 ## Prerequisites
 
-To run this application locally, you need to have the following software installed:
+This application can be run with or without Docker.
+
+### To run without Docker:
 
 - Java Development Kit (JDK) 17 or later
 - Apache Maven 3.6.3 or later
 - MongoDB Community Server
 - Git (optional, for cloning the repository)
 
-To run this applicaton using Docker, you need to have Docker Desktop installed or use Docker in a Linux environment. (not been tested yet)
+### To run with Docker:
+
+- Docker Desktop installed or Docker in a Linux environment (not tested yet)
+
+[Back to top](#table-of-contents)
+
+## Installation
 
 ### 1. Java Development Kit (JDK)
 
@@ -66,15 +96,19 @@ git clone https://github.com/vr33ni/vuejs-spring-app.git
 cd vuejs-spring-app/backend
 ```
 
-## Run locally without Docker
+[Back to top](#table-of-contents)
+
+## Running the application
+
+### Run locally without Docker
 
 Follow these steps to set up and run the application locally:
 
-### 1. Configure MongoDB
+#### 1. Configure MongoDB
 
 Ensure MongoDB is running on localhost:27017. No additional configuration is necessary if MongoDB is running with the default settings.
 
-### 2. Build the Project
+#### 2. Build the Project
 
 Navigate to the project directory and build the project using Maven:
 
@@ -82,20 +116,22 @@ Navigate to the project directory and build the project using Maven:
 mvn clean install
 ```
 
-### 3. Run the Application
+#### 3. Run the Application
 
 Start the Spring Boot application:
 
 ```sh
-./mvnw spring-boot:run
+./mvnw spring-boot:run -Dspring-boot.run.profiles=local
 ```
 
 The Maven Wrapper ensures that the same version of Maven is used by everyone working on the project, which helps avoid issues that can arise from different Maven versions.
 If you prefer to rely on a pre-installed Maven and use your global environment, you can also run:
 
  ```sh
- mvn spring-boot:run relies
- ```
+mvn spring-boot:run -Dspring-boot.run.profiles=local
+```
+
+[Back to top](#table-of-contents)
 
 ## Run locally with Docker (on Mac)
 
@@ -111,8 +147,10 @@ docker build --build-arg JAR_FILE=target/\*.jar --platform=linux/amd64  -t vr33n
 ### 2. Run the Docker container
 
 ```sh
-docker run --platform=linux/amd64 -p 8080:8080 vr33ni/backend                              
+docker-compose up                           
 ```
+
+[Back to top](#table-of-contents)
 
 ## Access the Application
 
@@ -122,12 +160,16 @@ Once the application is running, you can access it using a web browser or API cl
 http://localhost:8080/items
 ```
 
+[Back to top](#table-of-contents)
+
 ## Endpoints
 
 - GET /items/: Retrieve all items
 - GET /items/{id}: Retrieve an item by ID
 - POST /items/: Create a new item
 - DELETE /items/{id}: Delete an item by ID
+
+[Back to top](#table-of-contents)
 
 ## Initializing the Database
 
@@ -137,6 +179,8 @@ Additional Information
 - Database Configuration: The database connection settings can be found and modified in the application.properties file.
 - Dependencies: The project dependencies are managed using Maven and listed in the pom.xml file.
 
+[Back to top](#table-of-contents)
+
 ## Troubleshooting
 
 If you encounter any issues, ensure that:
@@ -145,3 +189,5 @@ If you encounter any issues, ensure that:
 - MongoDB is running and accessible at localhost:27017.
 
 Feel free to create an issue or contact the project maintainers for further assistance.
+
+[Back to top](#table-of-contents)
