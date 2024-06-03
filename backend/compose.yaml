@@ -1,6 +1,3 @@
-# networks:
-#   app-network:
-#     name: backend_app-network
 services:
   mongodb:
     image: mongo:latest
@@ -20,9 +17,6 @@ services:
       - mongodb
     environment:
       - SPRING_PROFILES_ACTIVE=prod
-
-    # networks:
-    #   - app-network
 
 volumes:
   mongodb_data:
