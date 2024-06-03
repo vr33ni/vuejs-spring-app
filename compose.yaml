@@ -9,7 +9,7 @@ services:
   backend:
     image: backend:latest
     build:
-      context: .
+      context: ./backend
       dockerfile: Dockerfile
     ports:
       - "8080:8080"

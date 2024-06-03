@@ -138,14 +138,19 @@ mvn spring-boot:run -Dspring-boot.run.profiles=local
 
 Follow these steps to set up and run the application locally:
 
-### 1. Build the Docker image
+Navigate to parent folder to start all the services required at once.
 
 ```sh
-cd vuejs-spring-app/backend
-docker build --build-arg JAR_FILE=target/\*.jar --platform=linux/amd64  -t vr33ni/backend .
+cd ..
 ```
 
-### 2. Run the Docker container
+### 1. Build the Docker images
+
+```sh
+docker-compose --build
+```
+
+### 2. Run the Docker containers
 
 ```sh
 docker-compose up                           
