@@ -18,7 +18,8 @@
 6. [Endpoints](#endpoints)
 7. [Initializing the Database](#initializing-the-database)
 8. [Additional Information](#additional-information)
-9. [Troubleshooting](#troubleshooting)
+9. [Architecture diagram](#architecture-diagram)
+10. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -173,12 +174,28 @@ http://localhost:8080/items
 
 ## Initializing the Database
 
-The application includes a DatabaseInitializer that creates an initial item in the MongoDB database when the application starts if the database is empty.
+The application includes a DatabaseSeeder that creates an initial list of items in the MongoDB database when the application starts if the database is empty.
+
 Additional Information
 
-- Database Configuration: The database connection settings can be found and modified in the application.properties file.
+- Database Configuration: The database connection settings can be found and modified in the application.properties (local or prod) file(s).
 - Dependencies: The project dependencies are managed using Maven and listed in the pom.xml file.
 
+[Back to top](#table-of-contents)
+
+## Architecture Diagram
+
+```mermaid
+graph TD
+    A[User] --> B[Web Browser]
+    B --> C[Spring Boot Application]
+    C --> D[MongoDB]
+
+    C --> E[Controller Layer]
+    E --> F[Service Layer]
+    F --> G[Repository Layer]
+    G --> D[MongoDB]
+```
 [Back to top](#table-of-contents)
 
 ## Troubleshooting
