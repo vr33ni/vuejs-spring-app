@@ -1,9 +1,10 @@
 // Import MongoDB client library
 const { MongoClient } = require('mongodb');
+require('dotenv').config();
 
 // MongoDB connection URL
 const url = process.env.MONGODB_URI || 'mongodb://mongodb:27017';
-
+ 
 // Database Name
 const dbName = 'mysurfboards';
 
@@ -11,7 +12,7 @@ const dbName = 'mysurfboards';
 async function migrate() {
     const client = new MongoClient(url);
 
-    try {
+     try {
         await client.connect();
 
         const db = client.db(dbName);

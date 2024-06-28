@@ -18,26 +18,31 @@ import com.vr33ni.backend.service.ItemService;
 public class DatabaseSeeder implements CommandLineRunner {
 
     private final ItemService itemService;
-    // private final DatabaseCleaner databaseCleaner;
+    //private final DatabaseCleaner databaseCleaner;
 
     @Autowired
     public DatabaseSeeder(ItemService itemService, DatabaseCleaner databaseCleaner) {
         this.itemService = itemService;
-        // this.databaseCleaner = databaseCleaner;
+       // this.databaseCleaner = databaseCleaner;
     }
 
     @Override
     public void run(String... args) throws Exception {
-        // // Clean database
-        // databaseCleaner.cleanDatabases("mydatabase", "mysurfboards");
-        // databaseCleaner.cleanCollections();
-
+    
         // Seed the database
-        // seedDatabase();
+        //seedDatabase();
 
         // Run migration scripts
-        System.out.println("running migration scripts");
-        runMigrationScripts();
+        if (!itemService.getAllItems().isEmpty()) {
+            System.out.println("migrations already exists");
+            //databaseCleaner.cleanDatabases("mysurfboards");
+            //databaseCleaner.cleanCollections();
+        }
+        else {
+            System.out.println("running migration scripts");
+            runMigrationScripts();
+
+        }
 
     }
 
