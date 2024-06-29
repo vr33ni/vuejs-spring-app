@@ -1,14 +1,13 @@
 <script setup lang="ts">
 import SurfShop from './components/SurfShop.vue'
+
+
 </script>
 
 <template>
   <div>
-    <a href="https://vuejs.org/" target="_blank">
-      <img src="./assets/vue.svg" class="logo vue" alt="Vue logo" />
-    </a>
+    <SurfShop msg="Surf shop" />
   </div>
-  <SurfShop msg="Surf shop" />
 </template>
 
 <style scoped>
