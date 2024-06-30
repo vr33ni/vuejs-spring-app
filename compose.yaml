@@ -18,5 +18,16 @@ services:
     environment:
       - SPRING_PROFILES_ACTIVE=prod
 
+
+  frontend:
+    image: frontend:latest
+    build:
+      context: ./frontend 
+      dockerfile: Dockerfile
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+
 volumes:
   mongodb_data:
