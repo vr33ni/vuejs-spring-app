@@ -1,20 +1,25 @@
 <template>
   <div class="container">
-    <h1>{{ msg }}</h1>
+    <h1>Boards</h1>
     <div class="search-container">
+    <div>
       <input v-model="searchQuery" placeholder="Search by name" />
-      <button @click="searchItems">Search</button>
+      <button @click="searchItems">Search by name</button>
     </div>
-    <div class="search-container">
+    <div>
       <input v-model="brandQuery" placeholder="Search by brand" />
-      <button @click="searchByBrand">Search</button>
+      <button @click="searchByBrand">Search by brand</button>
     </div>
-    <div class="search-container">
+    <div>
       <input v-model="typeQuery" placeholder="Search by type" />
-      <button @click="searchByType">Search</button>
+      <button @click="searchByType">Search by type</button>
     </div>
+  </div>
+
+  <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
+  
     <div class="list-container">
-      <h2>Surfboards</h2>
+      <h2>In stock</h2>
       <ul class="surfboard-list">
         <li v-for="item in items" :key="item.id">
           {{ item.name }} - {{ item.brand }} - {{ item.type }}
@@ -26,7 +31,7 @@
 
 <script setup lang="ts">
 import { ref, onMounted } from "vue";
-import http from "../http-common";
+import http from "../../http-common";
 
 interface Surfboard {
   id: number;
@@ -35,20 +40,20 @@ interface Surfboard {
   type: string;
 }
 
-// Define the props
-const props = defineProps<{ msg: string }>();
-
+ 
 // Define the state
 const items = ref<Surfboard[]>([]);
 const searchQuery = ref("");
 const brandQuery = ref("");
 const typeQuery = ref("");
+const errorMessage = ref("");
 
 const fetchItems = async () => {
   try {
     const response = await http.get<Surfboard[]>("/items");
     items.value = response.data;
   } catch (error) {
+    errorMessage.value = "Error fetching items";
     console.error("Error fetching items:", error);
   }
 };
@@ -60,31 +65,37 @@ const searchItems = async () => {
     );
     items.value = response.data;
   } catch (error) {
+    errorMessage.value = "Error searching items";
     console.error("Error searching items:", error);
   }
 };
 
 const searchByBrand = async () => {
   try {
+    console.log("Searching items by brand:", brandQuery.value);
     const response = await http.get<Surfboard[]>(
       `/items/brand/${brandQuery.value}`
     );
     items.value = response.data;
   } catch (error) {
+    errorMessage.value = "Error searching by brand";
     console.error("Error searching by brand:", error);
   }
 };
 
 const searchByType = async () => {
   try {
+    console.log("Searching items by type:", typeQuery.value);
     const response = await http.get<Surfboard[]>(
       `/items/type/${typeQuery.value}`
     );
     items.value = response.data;
   } catch (error) {
+    errorMessage.value = "Error searching by type";
     console.error("Error searching by type:", error);
   }
 };
+
 
 onMounted(fetchItems);
 </script>
@@ -92,21 +103,17 @@ onMounted(fetchItems);
 
 <style scoped>
 
-.search-container {
-  text-align: left;
-}
-
 .container {
-  max-width: 800px;
-  margin: 0 auto;
-  padding: 20px;
-  text-align: left; /* Ensure the container's text is aligned left */
+  width: 100%;  
+  padding: 10px;
+  text-align: left; 
 }
 
 .search-container {
   display: flex;
   align-items: center;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .search-container input {

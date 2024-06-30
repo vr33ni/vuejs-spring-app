@@ -1,0 +1,15 @@
+[
+    {
+      "id": 5,
+      "name": "SuperFish",
+      "brand": "TestBrand",
+      "type": "Fish"
+    },
+    {
+      "id": 6,
+      "name": "MegaLong",
+      "brand": "TestBrand",
+      "type": "Longboard"
+    }
+  ]
+  

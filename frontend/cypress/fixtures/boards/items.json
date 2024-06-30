@@ -1,0 +1,21 @@
+[
+    {
+      "id": 1,
+      "name": "Fish",
+      "brand": "BrandA",
+      "type": "Shortboard"
+    },
+    {
+      "id": 2,
+      "name": "Longboard",
+      "brand": "BrandB",
+      "type": "Longboard"
+    },
+    {
+      "id": 3,
+      "name": "Funboard",
+      "brand": "BrandC",
+      "type": "Funboard"
+    }
+  ]
+  
