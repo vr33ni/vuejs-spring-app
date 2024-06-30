@@ -11,18 +11,30 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.stereotype.Component;
 
-import com.vr33ni.backend.model.Item;
-import com.vr33ni.backend.service.ItemService;
+import com.vr33ni.backend.model.Board;
+import com.vr33ni.backend.service.BoardItemService;
+
+import com.vr33ni.backend.model.Wetsuit;
+import com.vr33ni.backend.service.WetsuitItemService;
+
+import com.vr33ni.backend.model.Accessory;
+import com.vr33ni.backend.service.AccessoryItemService;
 
 @Component
 public class DatabaseSeeder implements CommandLineRunner {
 
-    private final ItemService itemService;
+    private final BoardItemService boardItemService;
+    private final WetsuitItemService wetsuitItemService;
+    private final AccessoryItemService accessoryItemService;
+
     //private final DatabaseCleaner databaseCleaner;
 
     @Autowired
-    public DatabaseSeeder(ItemService itemService, DatabaseCleaner databaseCleaner) {
-        this.itemService = itemService;
+    public DatabaseSeeder(BoardItemService boardItemService, WetsuitItemService wetsuitItemService, AccessoryItemService accessoryItemService, DatabaseCleaner databaseCleaner) {
+        this.boardItemService = boardItemService;
+        this.wetsuitItemService = wetsuitItemService;
+        this.accessoryItemService = accessoryItemService;
+
        // this.databaseCleaner = databaseCleaner;
     }
 
@@ -33,8 +45,8 @@ public class DatabaseSeeder implements CommandLineRunner {
         //seedDatabase();
 
         // Run migration scripts
-        if (!itemService.getAllItems().isEmpty()) {
-            System.out.println("migrations already exists");
+        if (!boardItemService.getAllItems().isEmpty() && !wetsuitItemService.getAllItems().isEmpty() && !accessoryItemService.getAllItems().isEmpty()) {
+            System.out.println("board, wetsuit & accessory migrations already exist");
             //databaseCleaner.cleanDatabases("mysurfboards");
             //databaseCleaner.cleanCollections();
         }
@@ -48,12 +60,12 @@ public class DatabaseSeeder implements CommandLineRunner {
 
     private void seedDatabase() {
         // Check if the database is empty
-        if (itemService.getAllItems().isEmpty()) {
+        if (boardItemService.getAllItems().isEmpty()) {
             // Create and save an initial item
-            Item item = new Item();
+            Board item = new Board();
             item.setName("Delight Alliance Hoodoo Swallow");
             item.setPrice(10.0);
-            itemService.createItem(item);
+            boardItemService.createItem(item);
             System.out.println("First surfboard acquired");
         }
     }

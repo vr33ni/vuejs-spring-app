@@ -10,10 +10,12 @@ const routes =  [
   {
     path: "/shop",
     name: "shop",
-    component: () => import("./components/shop/Boards.vue"),
-    children: [
+    component: () => import("./components/shop/Shop.vue"),
+        children: [
         { path: 'boards', component:() => import("./components/shop/Boards.vue") },
-        { path: 'wetsuits', component:() => import("./components/shop/Boards.vue") },
+        { path: 'wetsuits', component:() => import("./components/shop/Wetsuits.vue") },
+        { path: 'accessories', component:() => import("./components/shop/Accessories.vue") },
+
       ]
   },
   {

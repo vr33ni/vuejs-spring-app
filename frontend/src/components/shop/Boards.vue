@@ -2,26 +2,23 @@
   <div class="container">
     <h1>Boards</h1>
     <div class="search-container">
-    <div>
-      <input v-model="searchQuery" placeholder="Search by name" />
-      <button @click="searchItems">Search by name</button>
+      <div>
+        <input v-model="searchQuery" placeholder="Search by name" />
+      </div>
+      <div>
+        <input v-model="brandQuery" placeholder="Search by brand" />
+      </div>
+      <div>
+        <input v-model="typeQuery" placeholder="Search by type" />
+      </div>
     </div>
-    <div>
-      <input v-model="brandQuery" placeholder="Search by brand" />
-      <button @click="searchByBrand">Search by brand</button>
-    </div>
-    <div>
-      <input v-model="typeQuery" placeholder="Search by type" />
-      <button @click="searchByType">Search by type</button>
-    </div>
-  </div>
 
-  <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
-  
+    <div v-if="errorMessage" class="error">{{ errorMessage }}</div>
+
     <div class="list-container">
       <h2>In stock</h2>
       <ul class="surfboard-list">
-        <li v-for="item in items" :key="item.id">
+        <li v-for="item in filteredItems" :key="item.id">
           {{ item.name }} - {{ item.brand }} - {{ item.type }}
         </li>
       </ul>
@@ -30,74 +27,32 @@
 </template>
 
 <script setup lang="ts">
-import { ref, onMounted } from "vue";
-import http from "../../http-common";
+import { ref, onMounted, computed } from "vue";
+import { useBoardStore } from '../../store/boards';
 
-interface Surfboard {
-  id: number;
-  name: string;
-  brand: string;
-  type: string;
-}
-
- 
 // Define the state
-const items = ref<Surfboard[]>([]);
-const searchQuery = ref("");
+ const searchQuery = ref("");
 const brandQuery = ref("");
 const typeQuery = ref("");
-const errorMessage = ref("");
+ 
+const surfboardStore = useBoardStore();
 
-const fetchItems = async () => {
-  try {
-    const response = await http.get<Surfboard[]>("/items");
-    items.value = response.data;
-  } catch (error) {
-    errorMessage.value = "Error fetching items";
-    console.error("Error fetching items:", error);
-  }
-};
+const fetchItems = surfboardStore.fetchItems;
+const items = computed(() => surfboardStore.items);
+const errorMessage = computed(() => surfboardStore.errorMessage);
 
-const searchItems = async () => {
-  try {
-    const response = await http.get<Surfboard[]>(
-      `/items/search?name=${searchQuery.value}`
+const filteredItems = computed(() => {
+  return items.value.filter(item => {
+    return (
+      item.name.toLowerCase().startsWith(searchQuery.value.toLowerCase()) &&
+      item.brand.toLowerCase().startsWith(brandQuery.value.toLowerCase()) &&
+      item.type.toLowerCase().startsWith(typeQuery.value.toLowerCase())
     );
-    items.value = response.data;
-  } catch (error) {
-    errorMessage.value = "Error searching items";
-    console.error("Error searching items:", error);
-  }
-};
-
-const searchByBrand = async () => {
-  try {
-    console.log("Searching items by brand:", brandQuery.value);
-    const response = await http.get<Surfboard[]>(
-      `/items/brand/${brandQuery.value}`
-    );
-    items.value = response.data;
-  } catch (error) {
-    errorMessage.value = "Error searching by brand";
-    console.error("Error searching by brand:", error);
-  }
-};
-
-const searchByType = async () => {
-  try {
-    console.log("Searching items by type:", typeQuery.value);
-    const response = await http.get<Surfboard[]>(
-      `/items/type/${typeQuery.value}`
-    );
-    items.value = response.data;
-  } catch (error) {
-    errorMessage.value = "Error searching by type";
-    console.error("Error searching by type:", error);
-  }
-};
-
+  });
+});
 
 onMounted(fetchItems);
+
 </script>
 
 
@@ -126,8 +81,8 @@ onMounted(fetchItems);
 }
 
 .surfboard-list {
-  list-style-type: disc; /* Ensure default list style is used */
-  padding-left: 20px; /* Add padding to ensure bullets are visible */
+  list-style-type: disc; 
+  padding-left: 20px; 
 }
 
 .surfboard-list li {

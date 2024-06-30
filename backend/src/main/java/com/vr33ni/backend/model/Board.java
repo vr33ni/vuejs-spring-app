@@ -4,8 +4,8 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.mongodb.core.mapping.Field;
 
-@Document(collection = "items")
-public class Item {
+@Document(collection = "boards")
+public class Board {
 
     @Id
     private String id;
@@ -21,10 +21,10 @@ public class Item {
     private double price;
 
     // Constructors
-    public Item() {
+    public Board() {
     }
 
-    public Item(String name, String brand, String type, double price) {
+    public Board(String name, String brand, String type, double price) {
         this.name = name;
         this.brand = brand;
         this.type = type;
@@ -77,7 +77,7 @@ public class Item {
 
     @Override
     public String toString() {
-        return "Item{" +
+        return "Board{" +
                 "id='" + id + '\'' +
                 ", name='" + name + '\'' +
                 ", brand='" + brand + '\'' +

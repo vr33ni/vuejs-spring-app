@@ -2,7 +2,7 @@
 
 ## Overview
 
-This project showcases a basic web shop application. The backend is built with Spring Boot and Java, using MongoDB as a database. The frontend is built with VueJs + Vite. The application can be run with or without using Docker.
+This project showcases a basic web shop application. The backend is built with Spring Boot and Java, using MongoDB as a database. The frontend is built with Vue.js + Vite. The application can be run with or without using Docker.
 Cypress is used for component and end-to-end testing.
 
 ## Prerequisites
