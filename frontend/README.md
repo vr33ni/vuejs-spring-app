@@ -1,5 +1,32 @@
-# Vue 3 + TypeScript + Vite
+# Vue.js Single Page Application
 
-This template should help get you started developing with Vue 3 and TypeScript in Vite. The template uses Vue 3 `<script setup>` SFCs, check out the [script setup docs](https://v3.vuejs.org/api/sfc-script-setup.html#sfc-script-setup) to learn more.
+## Overview
 
-Learn more about the recommended Project Setup and IDE Support in the [Vue Docs TypeScript Guide](https://vuejs.org/guide/typescript/overview.html#project-setup).
+This project is a basic single page application built with Vue.js and Vite as a build tool.
+
+## Prerequisites
+
+This application can be run with or without Docker.
+
+### To run without Docker
+
+- Node v18+
+- Npm v10.7.0+
+
+### To run with Docker
+
+- Docker Desktop installed or Docker in a Linux environment (not tested yet)
+
+## Installation
+
+## Run the application
+
+## Access the application
+
+## Troubleshooting
+
+If you encounter any issues, ensure that:
+
+- All prerequisites are installed and configured correctly.
+
+Feel free to create an issue or contact the project maintainers for further assistance.
