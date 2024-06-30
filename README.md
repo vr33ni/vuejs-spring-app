@@ -1,4 +1,4 @@
-# Web shop application with a VueJs frontend and a Spring based backend
+# Web shop application with a Vue.js frontend and a Spring based backend
 
 ## Overview
 
