@@ -18,8 +18,7 @@
 6. [Endpoints](#endpoints)
 7. [Initializing the Database](#initializing-the-database)
 8. [Additional Information](#additional-information)
-9. [Architecture diagram](#architecture-diagram)
-10. [Troubleshooting](#troubleshooting)
+9. [Troubleshooting](#troubleshooting)
 
 ## Overview
 
@@ -31,14 +30,14 @@ This project is a basic web application built with Spring Boot and Java, using M
 
 This application can be run with or without Docker.
 
-### To run without Docker:
+### To run without Docker
 
 - Java Development Kit (JDK) 17 or later
 - Apache Maven 3.6.3 or later
 - MongoDB Community Server
 - Git (optional, for cloning the repository)
 
-### To run with Docker:
+### To run with Docker
 
 - Docker Desktop installed or Docker in a Linux environment (not tested yet)
 
@@ -189,21 +188,6 @@ Additional Information
 - Database Configuration: The database connection settings can be found and modified in the application.properties (local or prod) file(s).
 - Dependencies: The project dependencies are managed using Maven and listed in the pom.xml file.
 
-[Back to top](#table-of-contents)
-
-## Architecture Diagram
-
-```mermaid
-graph TD
-    A[User] --> B[Web Browser]
-    B --> C[Spring Boot Application]
-    C --> D[MongoDB]
-
-    C --> E[Controller Layer]
-    E --> F[Service Layer]
-    F --> G[Repository Layer]
-    G --> D[MongoDB]
-```
 [Back to top](#table-of-contents)
 
 ## Troubleshooting
